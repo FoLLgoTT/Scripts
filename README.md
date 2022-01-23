@@ -6,10 +6,7 @@ The second application is selecting the correct framing when cropping a video to
 The meta file has the following format: with each row a new time interval begins. First value is the timestamp in seconds. Second value is the aspect ratio (e.g. 2.4 or 1.78) and the third value is the vertical shift (-1.0 to +1.0).
 
 **Example**
-0 2.4 0
-13.847 2.0 0
-63.397 2.4 0
-370.37 2.0 0
-
+0 2.4 0.1
+324.56 2.2 0
 
 The script prints the exact timestamp to command line. You can step exactly to the right frame with the configured keys im MPV when paused and read the value for the meta file.
