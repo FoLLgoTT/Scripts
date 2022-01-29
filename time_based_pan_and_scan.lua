@@ -28,8 +28,6 @@ function on_loaded()
 	local movieDir, file = utils.split_path(filename)
 	local panScanFile = movieDir .. "/" .. file .. ".panscan"
 	
-	cleanUp()
-	
 	if not existsFile(panScanFile) then
 		print("No time based pan and scan file found!")
 		return
@@ -51,6 +49,10 @@ function on_loaded()
 		mp.observe_property("time-pos", "number", panScanByTimeStamp)
 		print("Time based pan and scan file loaded.")
 	end
+end
+
+function on_unloaded()
+	cleanUp()
 end
 
 function AspectRatioToZoom(ar)
@@ -99,3 +101,4 @@ function panScanByTimeStamp(name, value)
 end
 
 mp.register_event('file-loaded', on_loaded)
+mp.register_event('end-file', on_unloaded)
