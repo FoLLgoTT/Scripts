@@ -1,5 +1,6 @@
 local utils = require 'mp.utils'
 
+local screenAR = 2.4
 local defaultAR = 2.4
 local defaultVerticalShift = 0.0
 
@@ -56,19 +57,7 @@ function on_unloaded()
 end
 
 function AspectRatioToZoom(ar)
-	if(ar == 2.35) then
-		return "-0.022"
-	elseif(ar == 2.2) then
-		return "-0.115"
-	elseif(ar == 2) then
-		return "-0.252"
-	elseif(ar == 1.85) then
-		return "-0.361"
-	elseif(ar <= 1.78) then
-		return "-0.419"
-	end
-	
-	return "0"
+	return math.log(ar / screenAR) / math.log(2)
 end
 
 function ApplyAspectRatio(ar)
