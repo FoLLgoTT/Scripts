@@ -57,7 +57,13 @@ function on_unloaded()
 end
 
 function AspectRatioToZoom(ar)
-	return math.log(ar / screenAR) / math.log(2)
+	if ar >= screenAR then 
+		return 0
+	elseif ar < 1.78 then 
+		return math.log(1.78 / screenAR) / math.log(2)
+	else 
+		return math.log(ar / screenAR) / math.log(2)
+	end
 end
 
 function ApplyAspectRatio(ar)
