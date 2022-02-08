@@ -36,7 +36,7 @@ function on_loaded()
 	
 	-- read file with time based aspect ratios and shifts
 	for line in io.lines(panScanFile) do
-		local timeFrom, ar, verticalShift = line:match("(%d*%.?%d+) (%d*%.?%d+) (%d*%.?%d+)")
+		local timeFrom, ar, verticalShift = line:match("(%d*%.?%d+) (%d*%.?%d+) ([-+]?%d*%.?%d+)")
 		panScanTimes[#panScanTimes + 1] = { timeFrom = tonumber(timeFrom), timeTo = 1000000.0, ar = tonumber(ar), verticalShift = verticalShift }
 	end
 	
@@ -48,7 +48,11 @@ function on_loaded()
 	-- register event for frame change
 	if(#panScanTimes > 0) then
 		mp.observe_property("time-pos", "number", panScanByTimeStamp)
-		print("Time based pan and scan file loaded.")
+		print("Time based pan and scan file loaded: " .. #panScanTimes .. " entries")
+	end
+	
+	for i = 1, #panScanTimes do
+		print("Line " .. i .. ": " .. panScanTimes[i].timeFrom .. " " .. panScanTimes[i].timeTo .. " " .. panScanTimes[i].ar .. " " .. panScanTimes[i].verticalShift)
 	end
 end
 
